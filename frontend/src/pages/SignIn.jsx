@@ -50,13 +50,13 @@ function SignIn() {
                 <label htmlFor='password' className='block text-gray-700 font-medium mb-1'>Password</label>
                 <div className='relative'>
                 <input type={`${showPassword?"text":"password"}`}  className='w-full border rounded-lg px-3 py-2 focus:outline-none'
-                  placeholder="Enter your Email" style={{border:` 1px solid ${borderColor}`}}
+                  placeholder="Enter your Password" style={{border:` 1px solid ${borderColor}`}}
                   onChange={(e)=>setPassword(e.target.value)} value={password}/>
                 <button className='absolute curser-pointer right-3 top-[14px] text-gray-500' onClick={() => setShowPassword(prev=>!prev)} >{!showPassword?<FaRegEye/>: <FaEyeSlash/>}</button>
                 </div>
                 
              </div>
-             <div className='text-right mb-4 text-[#ff4d2d] font-medium cursor-pointer' onClick={()=>navigate("forgot-password")}>
+             <div className='text-right mb-4 text-[#ff4d2d] font-medium cursor-pointer' onClick={()=>navigate("/forgot-password")}>
               Forgot Password</div>
 
               <button className={`w-full font-semibold 
