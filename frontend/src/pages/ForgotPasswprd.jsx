@@ -10,17 +10,18 @@ const ForgotPasswprd = () => {
     const [newPassword, setNewPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const navigate = useNavigate()
-
+    const [error,setError] = useState("")
     const handleSendOtp = async()=>{
         try {
             const result = await axios.post(`${serverUrl}/api/auth/send-otp`, {email},
                 {withCredentials:true}
             )
             console.log("result1",result)
+            setError("")
                 setStep(2)
             
         } catch (error) {
-            console.log(error)
+            setError(error?.response?.data?.message)
         }
     }
 
@@ -30,10 +31,11 @@ const ForgotPasswprd = () => {
                 {withCredentials:true}
             )
             console.log("result2",result)
+            setError("")
                 setStep(3)
             
         } catch (error) {
-            console.log(error)
+            setError(error?.response?.data?.message)
         }
     }
     const handleResetPassword = async()=>{
@@ -44,11 +46,13 @@ const ForgotPasswprd = () => {
             const result = await axios.post(`${serverUrl}/api/auth/reset-password`, {email,newPassword},
                 {withCredentials:true}
             )
+             setError("")
             console.log("result3",result)
+           
                navigate("/signin")
             
         } catch (error) {
-            console.log(error)
+            setError(error?.response?.data?.message)
         }
     } 
 
@@ -65,12 +69,13 @@ const ForgotPasswprd = () => {
              <div className='mb-6'>
                 <label htmlFor='email' className='block text-gray-700 font-medium mb-1'>Email</label>
                 <input type='email' className='w-full border-[1px] border-gray-200 rounded-lg px-3 py-2 focus:outline-none 
-                 ' placeholder="Enter your Email" onChange={(e)=>setEmail(e.target.value)} value={email} />
+                 ' placeholder="Enter your Email" onChange={(e)=>setEmail(e.target.value)} value={email} required/>
              </div>
              <button className={`w-full font-semibold 
               rounded-lg py-2 transition duration-200 bg-[#ff4d2d] text-white hover:bg-[#e64323] cursor-pointer`} onClick={handleSendOtp}
              >Send OTP
               </button>
+                {error &&  <p className='text-red-500 text-center my-[10px]'>*{error}</p> }
         </div>}
 
         {step== 2 && 
@@ -79,12 +84,13 @@ const ForgotPasswprd = () => {
              <div className='mb-6'>
                 <label htmlFor='otp' className='block text-gray-700 font-medium mb-1'>OTP</label>
                 <input type='email' className='w-full border-[1px] border-gray-200 rounded-lg px-3 py-2 focus:outline-none 
-                 ' placeholder="Enter OTP" onChange={(e)=>setOtp(e.target.value)} value={otp} />
+                 ' placeholder="Enter OTP" onChange={(e)=>setOtp(e.target.value)} value={otp} required/>
              </div>
              <button className={`w-full font-semibold 
               rounded-lg py-2 transition duration-200 bg-[#ff4d2d] text-white hover:bg-[#e64323] cursor-pointer`} onClick={handleVerifyOtp}
              >Verify OTP
               </button>
+               {error &&  <p className='text-red-500 text-center my-[10px]'>*{error}</p> }
         </div>
         }
 
@@ -94,18 +100,19 @@ const ForgotPasswprd = () => {
              <div className='mb-6'>
                 <label htmlFor='newPassword' className='block text-gray-700 font-medium mb-1'>New Password</label>
                 <input type='email' className='w-full border-[1px] border-gray-200 rounded-lg px-3 py-2 focus:outline-none 
-                 ' placeholder="Enter new password" onChange={(e)=>setNewPassword(e.target.value)} value={newPassword} />
+                 ' placeholder="Enter new password" onChange={(e)=>setNewPassword(e.target.value)} value={newPassword} required/>
              </div>
              <div className='mb-6'>
                 <label htmlFor='confirmPassword' className='block text-gray-700 font-medium mb-1'>Confirm Password</label>
                 <input type='email' className='w-full border-[1px] border-gray-200 rounded-lg px-3 py-2 focus:outline-none 
-                 ' placeholder="Confirm Password " onChange={(e)=>setConfirmPassword(e.target.value)} value={confirmPassword} />
+                 ' placeholder="Confirm Password " onChange={(e)=>setConfirmPassword(e.target.value)} value={confirmPassword} required/>
              </div>
              <button className={`w-full font-semibold 
               rounded-lg py-2 transition duration-200 bg-[#ff4d2d] text-white hover:bg-[#e64323] cursor-pointer`} 
               onClick={handleResetPassword}
              >Reset Password
               </button>
+              {error &&  <p className='text-red-500 text-center my-[10px]'>*{error}</p> }
         </div>
         }
       </div>
