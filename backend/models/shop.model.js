@@ -27,7 +27,7 @@ const shopSchema = new mongoose.Schema({
         required: true,
     },
     items: [{
-        type: mongoose.Schema.types.ObjectId,
+        type: mongoose.Schema.Types.ObjectId,
         ref: "Item"
     }]
 }, { timestamps: true })

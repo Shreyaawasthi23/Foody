@@ -1,6 +1,6 @@
-import Shop from "../models/shop.model";
-import uploadOnCloudinary from "../utils/cloudinary";
-import Item from "../models/items.model";
+import Shop from "../models/shop.model.js";
+import uploadOnCloudinary from "../utils/cloudinary.js";
+import Item from "../models/items.model.js";
 export const addItem = async (req, res) => {
     try {
         const { name, category, foodType, price } = req.body
