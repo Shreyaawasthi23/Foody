@@ -6,8 +6,10 @@ import { FaPowerOff } from "react-icons/fa";
 import { useState } from "react";
 import { RxCross2 } from "react-icons/rx";
 import axios from "axios";
-import { serverUrl } from "../src/App";
-import { setUserData } from "../src/redux/userSlice";
+//import { serverUrl } from "../App";
+import { serverUrl } from "../App";
+
+import { setUserData } from "../redux/userSlice";
 
 function Nav() {
   const { userData, city } = useSelector((state) => state.user);
@@ -34,7 +36,7 @@ function Nav() {
         <div
           className="md:w-[90%] h-[70px] bg-white shadow-xl rounded-lg
     items-center gap-[20px] flex fixed top-[80px] left-[5%]"
-       md:hidden >
+          md:hidden >
           <div
             className="flex items-center w-[30%] overflow-hidden gap-[10px] px-[10px]
         border-r-[2px] border-gray-400"
