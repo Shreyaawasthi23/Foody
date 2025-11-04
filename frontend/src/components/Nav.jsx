@@ -13,6 +13,7 @@ import { FaPlus } from "react-icons/fa";
 import { TbReceipt2 } from "react-icons/tb";
 function Nav() {
   const { userData, city } = useSelector((state) => state.user);
+  const { myShopData } = useSelector((state) => state.owner);
   const [showInfo, setShowInfo] = useState(false);
   const [showSearch, setShowSearch] = useState(false);
   const dispatch = useDispatch();
@@ -96,15 +97,18 @@ function Nav() {
         )}
 
         {userData.role == "owner" ? <>
-          <button className="hidden md:flex items-center gap-1 p-2 cursor-pointer rounded-full
+          {myShopData && <>
+            <button className="hidden md:flex items-center gap-1 p-2 cursor-pointer rounded-full
           bg-[#ff4d2d]/10 text-[#ff4d2d]">
-            <FaPlus size={20} />
-            <span>Add Food Item</span>
-          </button>
-          <button className="md:hidden flex items-center p-2 cursor-pointer rounded-full
+              <FaPlus size={20} />
+              <span>Add Food Item</span>
+            </button>
+            <button className="md:hidden flex items-center p-2 cursor-pointer rounded-full
           bg-[#ff4d2d]/10 text-[#ff4d2d]">
-            <FaPlus size={20} />
-          </button>
+              <FaPlus size={20} />
+            </button>
+          </>}
+
           <div className="hidden md:flex items-center gap-2 cursor-pointer relative px-3 py-1
           rounded-lg bg-[#ff4d2d]/10 text-[#ff4d2d] font-medium">
             <TbReceipt2 size={20} />
